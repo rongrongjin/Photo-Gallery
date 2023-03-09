@@ -1,0 +1,79 @@
+.mainContainer {
+  /* The image used */
+  /* background-image: url(https://source.unsplash.com/JIUjvqe2ZHg); */
+
+  /* Full height */
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 8px;
+
+  position: absolute;
+  min-width: 35%;
+  min-height: 5%;
+  left: 32.5%;
+  top: 0px;
+
+  background: rgba(48, 52, 56, 0.55);
+  backdrop-filter: blur(4px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 0px 0px 16px 16px;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 8px;
+  border: none;
+
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 12px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  /* identical to box height, or 167% */
+
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  /* Interface/White */
+
+  color: #ffffff;
+}
+
+.button:hover {
+  color: black;
+  background: rgba(209, 212, 222, 1);
+}
+
+@media (min-width: 1000px) {
+}
