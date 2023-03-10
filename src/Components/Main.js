@@ -7,7 +7,10 @@ const Main = (props) => {
     <div
       className="mainContainer"
       style={{
-        backgroundImage: `url(${"https://source.unsplash.com/JIUjvqe2ZHg"})`,
+        // backgroundImage: `url(${"https://source.unsplash.com/JIUjvqe2ZHg"})`,
+        backgroundImage: `url(${
+          props.fetchIamge[props.activeSlide].urls.regular
+        })`,
       }}
     >
       <div className="buttonContainer">

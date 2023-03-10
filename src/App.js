@@ -7,6 +7,7 @@ const imageID = ["JIUjvqe2ZHg", "GqbU78bdJFM", "gREquCUXQLI"];
 function App() {
   const [fetchImage, setFetchImage] = useState([]);
   const [carouIsShown, setCarouIsShown] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   const showCarouHandler = () => {
     setCarouIsShown(true);
@@ -15,16 +16,6 @@ function App() {
   const hideCarouHandler = () => {
     setCarouIsShown(false);
   };
-
-  // const [photo, setPhoto] = useState([
-  //   {
-  //     id: "JIUjvqe2ZHg",
-  //     name: "Bedroom",
-  //     floor: "Dark forest hardwood",
-  //     wall: "Pearl whilte",
-  //   },
-  //   { id: "GqbU78bdJFM", name: "Living room" },
-  // ]);
 
   async function test(id) {
     try {
@@ -58,9 +49,14 @@ function App() {
           onClose={hideCarouHandler}
           fetchImage={fetchImage}
           setFetchImage={setFetchImage}
+          setActiveSlide={setActiveSlide}
         />
       ) : (
-        <Main onShowCarou={showCarouHandler} />
+        <Main
+          onShowCarou={showCarouHandler}
+          activeSlide={activeSlide}
+          fetchImage={fetchImage}
+        />
       )}
     </div>
   );

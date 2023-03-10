@@ -16,6 +16,20 @@
 .splideposition .splideImg {
   /* border: red solid 1px; */
   border-radius: 25px;
+  transition: 0.5;
+}
+
+.splideImgBlur {
+  filter: blur(5px);
+  transition: 0.5s;
+}
+
+.splideImgGrab {
+  cursor: grab;
+}
+
+.splideImgGrabbing {
+  cursor: grabbing;
 }
 
 .bkgContainer {
@@ -168,4 +182,13 @@
   /* Interface/White */
 
   color: #ffffff;
+}
+
+.partTwo :hover {
+  color: black;
+  background: rgba(209, 212, 222, 1);
+}
+
+.splide__pagination {
+  margin-top: 40%;
 }

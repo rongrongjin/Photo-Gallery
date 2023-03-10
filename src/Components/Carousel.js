@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./carousel.css";
 import {
   Check,
@@ -11,6 +11,7 @@ import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
 const Carousel = (props) => {
+  const [test, setTest] = useState("");
   return (
     <div className="bkgContainer">
       <div className="btnContainer">
@@ -34,6 +35,9 @@ const Carousel = (props) => {
             padding: "20%",
             width: "100vw",
           }}
+          onActive={(slide) => {
+            props.setActiveSlide(slide.index);
+          }}
         >
           <SplideTrack>
             {props.fetchImage.map((item, index) => {
@@ -42,10 +46,24 @@ const Carousel = (props) => {
               return (
                 <SplideSlide key={index}>
                   <img
-                    className="splideImg"
+                    className={
+                      test === index || test === ""
+                        ? "splideImg splideImgGrab"
+                        : "splideImgBlur splideImg splideImgGrab"
+                    }
                     src={item.urls.regular}
-                    // src="https://source.unsplash.com/JIUjvqe2ZHg"
                     alt={item.urls.alt_description}
+                    onMouseDown={(e) => {
+                      setTest(index);
+                      e.currentTarget.classList.remove("splideImgGrab");
+                      e.currentTarget.classList.add("splideImgGrabbing");
+                    }}
+                    onMouseUp={(e) => {
+                      setTest("");
+                      e.currentTarget.classList.add("splideImgGrab");
+                      e.currentTarget.classList.remove("splideImgGrabbing");
+                    }}
+                    draggable={true}
                   />
 
                   <div className="photoInfo">
@@ -87,6 +105,8 @@ const Carousel = (props) => {
             <button className="add">
               <PlusSquare size={60} />
             </button>
+
+            {/* <div className="splide__pagination"></div> */}
           </SplideTrack>
         </Splide>
       </div>
