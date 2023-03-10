@@ -1,6 +1,12 @@
 import React from "react";
 import "./carousel.css";
-import { Check, PlusSquare } from "@phosphor-icons/react";
+import {
+  Check,
+  PlusSquare,
+  ShareNetwork,
+  Heart,
+  CopySimple,
+} from "@phosphor-icons/react";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
@@ -30,38 +36,54 @@ const Carousel = (props) => {
           }}
         >
           <SplideTrack>
-            <SplideSlide>
-              <img
-                className="splideImg"
-                // src={props.onResponse.urls}
-                src="https://source.unsplash.com/JIUjvqe2ZHg"
-                // alt={props.onResponse.urls[0]}
-                alt="Image 2"
-              />
+            {props.fetchImage.map((item, index) => {
+              console.log(item.urls);
 
-              <div>
-                <span>Hello</span>
-                <button>test</button>
-              </div>
-            </SplideSlide>
+              return (
+                <SplideSlide key={index}>
+                  <img
+                    className="splideImg"
+                    src={item.urls.regular}
+                    // src="https://source.unsplash.com/JIUjvqe2ZHg"
+                    alt={item.urls.alt_description}
+                  />
 
-            <SplideSlide>
-              <img
-                className="splideImg"
-                // src={props.onResponse[1].urls}
-                src="https://source.unsplash.com/GqbU78bdJFM"
-                alt="Image 2"
-              />
-            </SplideSlide>
-
-            <SplideSlide>
-              <img
-                className="splideImg"
-                // src={props.onResponse.urls}
-                src="https://source.unsplash.com/gREquCUXQLI"
-                alt="Image 2"
-              />
-            </SplideSlide>
+                  <div className="photoInfo">
+                    <div className="partOne">
+                      <div> {item.alt_description}</div>
+                      <div className="partOneSubOne">
+                        <div className="partOneSubTwo">
+                          Room - {item.tags_preview[1].title}
+                        </div>
+                        <div>Detail - {item.tags_preview[2].title}</div>
+                      </div>
+                    </div>
+                    <div className="partTwo">
+                      <button>
+                        <ShareNetwork size={20} /> SHARE
+                      </button>
+                      <button>
+                        <Heart size={20} />
+                        FAVOURITE
+                      </button>
+                      <button
+                        onClick={() => {
+                          let newFetchedImage = [
+                            ...props.fetchImage.slice(0, index + 1),
+                            item,
+                            ...props.fetchImage.slice(index + 1),
+                          ];
+                          props.setFetchImage(newFetchedImage);
+                        }}
+                      >
+                        <CopySimple size={20} />
+                        DUPLICATE
+                      </button>
+                    </div>
+                  </div>
+                </SplideSlide>
+              );
+            })}
             <button className="add">
               <PlusSquare size={60} />
             </button>

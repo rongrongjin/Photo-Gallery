@@ -54,9 +54,13 @@ function App() {
   return (
     <div>
       {carouIsShown ? (
-        <Carousel onClose={hideCarouHandler} onResponse={fetchImage} />
+        <Carousel
+          onClose={hideCarouHandler}
+          fetchImage={fetchImage}
+          setFetchImage={setFetchImage}
+        />
       ) : (
-        <Main onShowCarou={showCarouHandler} onResponse={fetchImage} />
+        <Main onShowCarou={showCarouHandler} />
       )}
     </div>
   );

@@ -19,7 +19,7 @@
 }
 
 .bkgContainer {
-  background-color: gray;
+  background-color: rgba(80, 88, 96, 1);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -93,10 +93,79 @@
 .add {
   max-height: 80px;
   margin-top: 30%;
+  margin-left: 10%;
   background-color: transparent;
   border-color: transparent;
 }
 
 .add:hover {
   color: white;
+}
+
+.btnset {
+  display: flex;
+  justify-content: end;
+}
+
+.photoInfo {
+  display: flex;
+  width: 90%;
+  margin-left: 1rem;
+  margin-top: 2rem;
+  justify-content: space-between;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 167% */
+
+  letter-spacing: 0.5px;
+
+  color: #ffffff;
+}
+
+.partOne {
+  display: flex;
+  flex-direction: column;
+}
+.partOneSubOne {
+  display: flex;
+}
+.partOneSubTwo {
+  margin-right: 1rem;
+}
+.partTwo {
+  align-self: center;
+  display: flex;
+}
+
+.partTwo > button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  padding: 12px 16px;
+  margin-right: 10px;
+
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 12px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  /* identical to box height, or 167% */
+
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  /* Interface/White */
+
+  color: #ffffff;
 }
