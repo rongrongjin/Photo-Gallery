@@ -1,15 +1,21 @@
 .mainContainerCarousel {
-  animation: zoom-in-zoom-out 1s ease forwards;
-  border-radius: 10px;
+  animation: zoom-in-zoom-out 1.5s ease forwards;
+  margin-top: 90px;
+  z-index: -2;
 }
 
 @keyframes zoom-in-zoom-out {
   0% {
     transform: scale(1);
   }
-  100% {
-    transform: scale(0.7);
+  80% {
+    transform: scale(0.95);
   }
+}
+
+.splideposition .splideImg {
+  /* border: red solid 1px; */
+  border-radius: 25px;
 }
 
 .bkgContainer {
@@ -82,4 +88,15 @@
 .btn:hover {
   color: black;
   background: rgba(209, 212, 222, 1);
+}
+
+.add {
+  max-height: 80px;
+  margin-top: 30%;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.add:hover {
+  color: white;
 }

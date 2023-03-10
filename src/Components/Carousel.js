@@ -1,7 +1,7 @@
 import React from "react";
 import "./carousel.css";
-import { Check } from "@phosphor-icons/react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Check, PlusSquare } from "@phosphor-icons/react";
+import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
 const Carousel = (props) => {
@@ -14,31 +14,62 @@ const Carousel = (props) => {
         </button>
       </div>
 
-      <div
-        className="mainContainer mainContainerCarousel"
-        style={{
-          // backgroundImage: `url(${"https://source.unsplash.com/JIUjvqe2ZHg"})`,
-          zIndex: "-2",
-        }}
-      >
+      <div className="mainContainer mainContainerCarousel">
         <Splide
+          hasTrack={false}
           aria-label="My Favorite Images"
+          className="splideposition"
           options={{
-            perPage:1,
-            rewind: true,
-            width: 4000,
-            gap: "1rem",
+            // width: 1800,
+            // gap: "1rem",
+            // perPage: 1,
+            // focus: "center",
+            // type: "loop",
+            padding: "20%",
+            width: "100vw",
           }}
         >
-          <SplideSlide>
-            <img src="https://source.unsplash.com/JIUjvqe2ZHg" alt="Image 1" />
-          </SplideSlide>
-          <SplideSlide>
-            <img src="https://source.unsplash.com/JIUjvqe2ZHg" alt="Image 2" />
-          </SplideSlide>
+          <SplideTrack>
+            <SplideSlide>
+              <img
+                className="splideImg"
+                // src={props.onResponse.urls}
+                src="https://source.unsplash.com/JIUjvqe2ZHg"
+                // alt={props.onResponse.urls[0]}
+                alt="Image 2"
+              />
+
+              <div>
+                <span>Hello</span>
+                <button>test</button>
+              </div>
+            </SplideSlide>
+
+            <SplideSlide>
+              <img
+                className="splideImg"
+                // src={props.onResponse[1].urls}
+                src="https://source.unsplash.com/GqbU78bdJFM"
+                alt="Image 2"
+              />
+            </SplideSlide>
+
+            <SplideSlide>
+              <img
+                className="splideImg"
+                // src={props.onResponse.urls}
+                src="https://source.unsplash.com/gREquCUXQLI"
+                alt="Image 2"
+              />
+            </SplideSlide>
+            <button className="add">
+              <PlusSquare size={60} />
+            </button>
+          </SplideTrack>
         </Splide>
       </div>
     </div>
+    // </div>
   );
 };
 

@@ -4,10 +4,12 @@ import { SignOut, Eye, Swap, ShareNetwork } from "@phosphor-icons/react";
 
 const Main = (props) => {
   return (
-
-    <div className="mainContainer" style={{
-        backgroundImage: `url(${'https://source.unsplash.com/JIUjvqe2ZHg'})`
-      }}>
+    <div
+      className="mainContainer"
+      style={{
+        backgroundImage: `url(${"https://source.unsplash.com/JIUjvqe2ZHg"})`,
+      }}
+    >
       <div className="buttonContainer">
         <button className="button">
           <SignOut size={20} />
