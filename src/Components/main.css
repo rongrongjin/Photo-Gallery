@@ -1,19 +1,9 @@
 .mainContainer {
-  /* The image used */
-  /* background-image: url(https://source.unsplash.com/JIUjvqe2ZHg); */
-
-  /* Full height */
-
-  /* Center and scale the image nicely */
-
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  min-width: 100%;
-  min-height: 100%;
+  background-size: 100% 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .buttonContainer {
@@ -24,16 +14,15 @@
   padding: 10px;
   gap: 8px;
 
-  position: absolute;
   min-width: 35%;
   min-height: 5%;
-  left: 32.5%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
   top: 0px;
-
   background: rgba(48, 52, 56, 0.55);
   backdrop-filter: blur(4px);
   /* Note: backdrop-filter has minimal browser support */
-
   border-radius: 0px 0px 16px 16px;
 }
 
@@ -77,4 +66,13 @@
 }
 
 @media (min-width: 1000px) {
+}
+
+@keyframes zoom-out-zoom-in {
+  0% {
+    transform: scale(2);
+  }
+  80% {
+    transform: scale(0.95);
+  }
 }

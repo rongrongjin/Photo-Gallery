@@ -6,7 +6,7 @@
 
 @keyframes zoom-in-zoom-out {
   0% {
-    transform: scale(1);
+    transform: scale(2);
   }
   80% {
     transform: scale(0.95);
@@ -17,6 +17,8 @@
   /* border: red solid 1px; */
   border-radius: 25px;
   transition: 0.5;
+  height: 85%;
+  width: 90%;
 }
 
 .splideImgBlur {
@@ -52,10 +54,8 @@
   padding: 10px;
   gap: 8px;
 
-  position: absolute;
   min-width: 5%;
   min-height: 5%;
-  left: 47.5%;
   top: 0px;
 
   background: rgba(48, 52, 56, 0.55);
@@ -63,6 +63,10 @@
   /* Note: backdrop-filter has minimal browser support */
 
   border-radius: 0px 0px 16px 16px;
+
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
 }
 
 .btn {
@@ -100,7 +104,8 @@
 }
 
 .btn:hover {
-  color: black;
+  color: green;
+  font-weight: bold;
   background: rgba(209, 212, 222, 1);
 }
 
@@ -189,6 +194,16 @@
   background: rgba(209, 212, 222, 1);
 }
 
-.splide__pagination {
+/* .splide__pagination {
   margin-top: 40%;
+} */
+
+/* .splide__pagination .splide__pagination--ltr {
+  border: red solid 1px !important;
+} */
+
+.customPagination {
+  z-index: 2;
+  position: absolute;
+  top: 100%;
 }

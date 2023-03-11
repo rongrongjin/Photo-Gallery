@@ -6,12 +6,26 @@ import {
   ShareNetwork,
   Heart,
   CopySimple,
+  Trash,
 } from "@phosphor-icons/react";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
+import axios from "axios";
 
 const Carousel = (props) => {
-  const [test, setTest] = useState("");
+  const [onDrag, setOnDrag] = useState("");
+  async function getRandomRoom() {
+    try {
+      const res = await axios(
+        "https://api.unsplash.com/photos/random/?client_id=rukY1OlnlbFNT-7JlrMOiAtXuKY7FVKZ-JMyn7MedbU&query=room&orientation=landscape"
+      );
+
+      console.log(res.data);
+      props.setFetchImage([...props.fetchImage, res.data]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="bkgContainer">
       <div className="btnContainer">
@@ -29,15 +43,22 @@ const Carousel = (props) => {
           options={{
             // width: 1800,
             // gap: "1rem",
-            // perPage: 1,
+            perPage: 1,
             // focus: "center",
             // type: "loop",
+            // start: `${props.activeSlide}`,
             padding: "20%",
             width: "100vw",
+            classes: {
+              pagination: "splide__pagination customPagination",
+            },
           }}
           onActive={(slide) => {
             props.setActiveSlide(slide.index);
           }}
+          // onMounted={(slide) => {
+          //   slide.go(props.activeSlide );
+          // }}
         >
           <SplideTrack>
             {props.fetchImage.map((item, index) => {
@@ -47,19 +68,19 @@ const Carousel = (props) => {
                 <SplideSlide key={index}>
                   <img
                     className={
-                      test === index || test === ""
+                      onDrag === index || onDrag === ""
                         ? "splideImg splideImgGrab"
                         : "splideImgBlur splideImg splideImgGrab"
                     }
                     src={item.urls.regular}
                     alt={item.urls.alt_description}
                     onMouseDown={(e) => {
-                      setTest(index);
+                      setOnDrag(index);
                       e.currentTarget.classList.remove("splideImgGrab");
                       e.currentTarget.classList.add("splideImgGrabbing");
                     }}
                     onMouseUp={(e) => {
-                      setTest("");
+                      setOnDrag("");
                       e.currentTarget.classList.add("splideImgGrab");
                       e.currentTarget.classList.remove("splideImgGrabbing");
                     }}
@@ -77,6 +98,21 @@ const Carousel = (props) => {
                       </div>
                     </div>
                     <div className="partTwo">
+                      {props.fetchImage.length > 1 && (
+                        <button
+                          style={{ color: "red" }}
+                          onClick={() => {
+                            // props.fetchImage.filter(item=>item.index === index )
+                            let arr = [
+                              ...props.fetchImage.slice(0, index),
+                              ...props.fetchImage.slice(index + 1),
+                            ];
+                            props.setFetchImage(arr);
+                          }}
+                        >
+                          <Trash size={20} /> DELETE
+                        </button>
+                      )}
                       <button>
                         <ShareNetwork size={20} /> SHARE
                       </button>
@@ -102,11 +138,9 @@ const Carousel = (props) => {
                 </SplideSlide>
               );
             })}
-            <button className="add">
+            <button className="add" onClick={getRandomRoom}>
               <PlusSquare size={60} />
             </button>
-
-            {/* <div className="splide__pagination"></div> */}
           </SplideTrack>
         </Splide>
       </div>

@@ -7,9 +7,10 @@ const Main = (props) => {
     <div
       className="mainContainer"
       style={{
-        // backgroundImage: `url(${"https://source.unsplash.com/JIUjvqe2ZHg"})`,
+        height: "100vh",
+        width: "100vw",
         backgroundImage: `url(${
-          props.fetchIamge[props.activeSlide].urls.regular
+          props.fetchImage[props.activeSlide]?.urls.regular
         })`,
       }}
     >
@@ -18,7 +19,7 @@ const Main = (props) => {
           <SignOut size={20} />
           Exit
         </button>
-        <button className="button">
+        <button className="button" onClick={props.roomChangeHandler}>
           <Swap size={20} />
           Change Room
         </button>

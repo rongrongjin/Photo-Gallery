@@ -9,6 +9,12 @@ function App() {
   const [carouIsShown, setCarouIsShown] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
 
+  const roomChangeHandler = () => {
+    activeSlide + 1 < fetchImage.length
+      ? setActiveSlide(activeSlide + 1)
+      : setActiveSlide(0);
+  };
+
   const showCarouHandler = () => {
     setCarouIsShown(true);
   };
@@ -39,9 +45,6 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-    console.log("here is fetchimage", fetchImage);
-  }, [fetchImage]);
   return (
     <div>
       {carouIsShown ? (
@@ -56,6 +59,7 @@ function App() {
           onShowCarou={showCarouHandler}
           activeSlide={activeSlide}
           fetchImage={fetchImage}
+          roomChangeHandler={roomChangeHandler}
         />
       )}
     </div>
