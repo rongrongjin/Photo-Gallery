@@ -6,14 +6,14 @@ const Main = (props) => {
   return (
     <div className="bkg">
       <div
-        className="mainContainer"
+        className="mainContainer mainContainerZoomAnimation"
+        id="mainContainerButtonContainer"
         style={{
           height: "100vh",
           width: "100vw",
           backgroundImage: `url(${
             props.fetchImage[props.activeSlide]?.urls.regular
           })`,
-          animation: "flash 1.5s .5s",
         }}
       >
         <div className="buttonContainer">
@@ -21,7 +21,24 @@ const Main = (props) => {
             <SignOut size={20} />
             Exit
           </button>
-          <button className="button" onClick={props.roomChangeHandler}>
+          <button
+            className="button"
+            onClick={(e) => {
+              props.roomChangeHandler();
+              let grandParentContainer = document.querySelector(
+                "#mainContainerButtonContainer"
+              );
+              grandParentContainer.classList.add("mainContainerTransition");
+              grandParentContainer.classList.remove(
+                "mainContainerZoomAnimation"
+              );
+              setTimeout(() => {
+                grandParentContainer.classList.remove(
+                  "mainContainerTransition"
+                );
+              }, 1500);
+            }}
+          >
             <Swap size={20} />
             Change Room
           </button>

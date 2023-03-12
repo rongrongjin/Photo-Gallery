@@ -11,6 +11,9 @@
     transform: scale(1);
   }
 }
+.mainContainerZoomAnimation {
+  animation: zoom-in 1.5s ease forwards;
+}
 
 .mainContainer {
   background-position: center;
@@ -18,7 +21,21 @@
   background-size: 100% 100%;
   max-width: 100%;
   max-height: 100%;
-  animation: zoom-in 1.5s ease forwards;
+  transition: 1s ease-in-out;
+  opacity: 1;
+}
+
+@keyframes changeRoom {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.mainContainerTransition {
+  transition: 1s ease-in-out;
+  animation: changeRoom 1.5s ease forwards;
 }
 .buttonContainer {
   display: flex;
@@ -28,7 +45,7 @@
   padding: 10px;
   gap: 8px;
 
-  min-width: 35%;
+  min-width: 500px;
   min-height: 5%;
   position: absolute;
   left: 50%;
@@ -79,6 +96,9 @@
   background: rgba(209, 212, 222, 1);
 }
 
-@media (max-width: 1250px) {
-  /* … */
+@media (max-width: 1200px) {
+  .button {
+    scale: 90%;
+    margin-right: -10px;
+  }
 }

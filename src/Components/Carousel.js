@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./carousel.css";
 import {
   Check,
@@ -12,8 +12,34 @@ import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import axios from "axios";
 
+const newSlideEntryAnimation = [{ opacity: "0" }, { opacity: "1" }];
+const newSlideEntryAnimationTiming = {
+  duration: 1000,
+  iterations: 1,
+};
+
 const Carousel = (props) => {
   const [onDrag, setOnDrag] = useState("");
+  const [addOnClick, setAddOnClick] = useState(false);
+  useEffect(() => {
+    if (addOnClick) {
+      let newSlide = document.querySelector(
+        `#slideImage${props.fetchImage.length - 1}`
+      );
+      newSlide.animate(newSlideEntryAnimation, newSlideEntryAnimationTiming);
+    }
+    setAddOnClick(false);
+  }, [props.fetchImage]);
+  const [matches, setMatches] = useState(
+    window.matchMedia("(min-width: 1200px)").matches
+  );
+
+  useEffect(() => {
+    window
+      .matchMedia("(min-width: 1200px)")
+      .addEventListener("change", (e) => setMatches(e.matches));
+  }, []);
+
   async function getRandomRoom() {
     try {
       const res = await axios(
@@ -27,7 +53,14 @@ const Carousel = (props) => {
     }
   }
   return (
-    <div className="bkgContainer">
+    <div
+      className="bkgContainer"
+      onMouseUp={(e) => {
+        setOnDrag("");
+        e.currentTarget.classList.add("splideImgGrab");
+        e.currentTarget.classList.remove("splideImgGrabbing");
+      }}
+    >
       <div className="btnContainer">
         <button className="btn" onClick={props.onClose}>
           <Check size={20} />
@@ -64,6 +97,7 @@ const Carousel = (props) => {
               return (
                 <SplideSlide key={index}>
                   <img
+                    id={`slideImage${index}`}
                     className={
                       onDrag === index || onDrag === ""
                         ? "splideImg splideImgGrab"
@@ -84,57 +118,65 @@ const Carousel = (props) => {
                     // draggable={true}
                   />
 
-                  <div className="photoInfo">
-                    <div className="partOne">
-                      <div> {item.alt_description}</div>
-                      <div className="partOneSubOne">
-                        <div className="partOneSubTwo">
-                          Room - {item.tags_preview[1].title}
+                  {matches && (
+                    <div className="photoInfo">
+                      <div className="partOne">
+                        <div> {item.alt_description}</div>
+                        <div className="partOneSubOne">
+                          <div className="partOneSubTwo">
+                            Room - {item.tags_preview[1].title}
+                          </div>
+                          <div>Detail - {item.tags_preview[2].title}</div>
                         </div>
-                        <div>Detail - {item.tags_preview[2].title}</div>
                       </div>
-                    </div>
-                    <div className="partTwo">
-                      {props.fetchImage.length > 1 && (
+                      <div className="partTwo">
+                        {props.fetchImage.length > 1 && (
+                          <button
+                            style={{ color: "red" }}
+                            onClick={() => {
+                              let arr = [
+                                ...props.fetchImage.slice(0, index),
+                                ...props.fetchImage.slice(index + 1),
+                              ];
+                              props.setFetchImage(arr);
+                            }}
+                          >
+                            <Trash size={20} /> DELETE
+                          </button>
+                        )}
+                        <button>
+                          <ShareNetwork size={20} /> SHARE
+                        </button>
+                        <button>
+                          <Heart size={20} />
+                          FAVOURITE
+                        </button>
                         <button
-                          style={{ color: "red" }}
                           onClick={() => {
-                            let arr = [
-                              ...props.fetchImage.slice(0, index),
+                            let newFetchedImage = [
+                              ...props.fetchImage.slice(0, index + 1),
+                              item,
                               ...props.fetchImage.slice(index + 1),
                             ];
-                            props.setFetchImage(arr);
+                            props.setFetchImage(newFetchedImage);
                           }}
                         >
-                          <Trash size={20} /> DELETE
+                          <CopySimple size={20} />
+                          DUPLICATE
                         </button>
-                      )}
-                      <button>
-                        <ShareNetwork size={20} /> SHARE
-                      </button>
-                      <button>
-                        <Heart size={20} />
-                        FAVOURITE
-                      </button>
-                      <button
-                        onClick={() => {
-                          let newFetchedImage = [
-                            ...props.fetchImage.slice(0, index + 1),
-                            item,
-                            ...props.fetchImage.slice(index + 1),
-                          ];
-                          props.setFetchImage(newFetchedImage);
-                        }}
-                      >
-                        <CopySimple size={20} />
-                        DUPLICATE
-                      </button>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </SplideSlide>
               );
             })}
-            <button className="add" onClick={getRandomRoom}>
+            <button
+              className="add"
+              onClick={() => {
+                getRandomRoom();
+                setAddOnClick(true);
+              }}
+            >
               <PlusSquare size={60} />
             </button>
           </SplideTrack>

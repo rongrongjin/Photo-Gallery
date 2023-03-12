@@ -2,6 +2,8 @@
   animation: zoom-in-zoom-out 1.5s ease forwards;
   margin-top: 90px;
   z-index: -2;
+
+  /* border: 1px red solid; */
 }
 
 @keyframes zoom-in-zoom-out {
@@ -17,7 +19,7 @@
   /* border: red solid 1px; */
   border-radius: 25px;
   transition: 0.5;
-  height: 65%;
+  height: 85%;
   width: 90%;
 }
 
@@ -44,6 +46,8 @@
   left: 0px;
   min-width: 100%;
   min-height: 100%;
+  overflow-y: scroll;
+  height: 1000px;
 }
 
 .btnContainer {
@@ -115,10 +119,13 @@
   margin-left: 10%;
   background-color: transparent;
   border-color: transparent;
+  scale: 1;
 }
 
 .add:hover {
-  color: white;
+  scale: 1.4;
+  cursor: pointer;
+  transition: 0.3s ease-in;
 }
 
 .btnset {
