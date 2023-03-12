@@ -10,26 +10,62 @@ import {
 } from "@phosphor-icons/react";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-import axios from "axios";
+import getRandomRoom from "../Service/randomRoom";
 
+// animation properties for slide addition,deletion, and duplication
 const newSlideEntryAnimation = [{ opacity: "0" }, { opacity: "1" }];
-const newSlideEntryAnimationTiming = {
+const newSlideExitAnimation = [{ opacity: "1" }, { opacity: "0" }];
+const newSlideEntryAndExitAnimationTiming = {
   duration: 1000,
   iterations: 1,
 };
 
 const Carousel = (props) => {
-  const [onDrag, setOnDrag] = useState("");
+  const [onDrag, setOnDrag] = useState(""); //state for storing the current index of slide that is being dragged
+
+  //supporting state to identify if the addition, duplication or deletion button is clicked, used for animation purpose
   const [addOnClick, setAddOnClick] = useState(false);
+  const [addOnDuplicate, setAddOnDuplicate] = useState(false);
+  const [deleteOnClick, setDeleteOnClick] = useState(false);
+
+  // when fetchImage state changes, check condition on which button is pressed and play animation accordingly
   useEffect(() => {
     if (addOnClick) {
       let newSlide = document.querySelector(
         `#slideImage${props.fetchImage.length - 1}`
       );
-      newSlide.animate(newSlideEntryAnimation, newSlideEntryAnimationTiming);
+      newSlide.animate(
+        newSlideEntryAnimation,
+        newSlideEntryAndExitAnimationTiming
+      );
     }
+    if (addOnDuplicate) {
+      let newSlide = document.querySelector(
+        `#slideImage${props.activeSlide + 1}`
+      );
+      newSlide.animate(
+        newSlideEntryAnimation,
+        newSlideEntryAndExitAnimationTiming
+      );
+    }
+
+    setAddOnDuplicate(false);
     setAddOnClick(false);
   }, [props.fetchImage]);
+
+  // use different set of animation properties for deletion
+  useEffect(() => {
+    if (deleteOnClick) {
+      let newSlide = document.querySelector(`#slideImage${props.activeSlide}`);
+      newSlide.animate(
+        newSlideExitAnimation,
+        newSlideEntryAndExitAnimationTiming
+      );
+    }
+    setDeleteOnClick(false);
+  }, [deleteOnClick]);
+
+  //Use to detect tablet view
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 1200px)").matches
   );
@@ -40,46 +76,34 @@ const Carousel = (props) => {
       .addEventListener("change", (e) => setMatches(e.matches));
   }, []);
 
-  async function getRandomRoom() {
-    try {
-      const res = await axios(
-        "https://api.unsplash.com/photos/random/?client_id=rukY1OlnlbFNT-7JlrMOiAtXuKY7FVKZ-JMyn7MedbU&query=room&orientation=landscape"
-      );
-
-      console.log(res.data);
-      props.setFetchImage([...props.fetchImage, res.data]);
-    } catch (error) {
-      console.log(error);
-    }
-  }
   return (
+    // parent carousel container
     <div
-      className="bkgContainer"
+      className="carouselViewContainer"
+      // for removing the blur of images and the grabbing cursor when user move the cursor out of the slide
       onMouseUp={(e) => {
         setOnDrag("");
         e.currentTarget.classList.add("splideImgGrab");
         e.currentTarget.classList.remove("splideImgGrabbing");
       }}
     >
+      {/* Done button */}
       <div className="btnContainer">
-        <button className="btn" onClick={props.onClose}>
+        <button className="btn" onClick={props.changeViewMode}>
           <Check size={20} />
           Done
         </button>
       </div>
 
+      {/* Carousel Container */}
       <div className="mainContainerCarousel">
         <Splide
           hasTrack={false}
           aria-label="My Favorite Images"
-          className="splideposition"
+          className="splidePosition"
           options={{
-            // width: 1800,
-            // gap: "1rem",
+            pagination: false,
             perPage: 1,
-            // focus: "center",
-            // type: "loop",
-            // start: `${props.activeSlide}`,
             padding: "20%",
             width: "100vw",
             classes: {
@@ -96,6 +120,7 @@ const Carousel = (props) => {
 
               return (
                 <SplideSlide key={index}>
+                  {/* Adding blur effect on images not selected */}
                   <img
                     id={`slideImage${index}`}
                     className={
@@ -105,6 +130,7 @@ const Carousel = (props) => {
                     }
                     src={item.urls.regular}
                     alt={item.urls.alt_description}
+                    // for applying blur effect and grabbing cursor when user select a slide
                     onMouseDown={(e) => {
                       setOnDrag(index);
                       e.currentTarget.classList.remove("splideImgGrab");
@@ -115,30 +141,33 @@ const Carousel = (props) => {
                       e.currentTarget.classList.add("splideImgGrab");
                       e.currentTarget.classList.remove("splideImgGrabbing");
                     }}
-                    // draggable={true}
                   />
 
+                  {/* if window size is in tablet version, remove photo descriptions and buttons */}
                   {matches && (
-                    <div className="photoInfo">
-                      <div className="partOne">
+                    <div className="photoNavigationContainer">
+                      <div className="photoDescription">
                         <div> {item.alt_description}</div>
-                        <div className="partOneSubOne">
-                          <div className="partOneSubTwo">
+                        <div className="photoDescriptionTop">
+                          <div className="photoDescriptionBot">
                             Room - {item.tags_preview[1].title}
                           </div>
                           <div>Detail - {item.tags_preview[2].title}</div>
                         </div>
                       </div>
-                      <div className="partTwo">
+                      <div className="photoButtons">
                         {props.fetchImage.length > 1 && (
                           <button
                             style={{ color: "red" }}
                             onClick={() => {
-                              let arr = [
-                                ...props.fetchImage.slice(0, index),
-                                ...props.fetchImage.slice(index + 1),
-                              ];
-                              props.setFetchImage(arr);
+                              setDeleteOnClick(true);
+                              setTimeout(() => {
+                                let arr = [
+                                  ...props.fetchImage.slice(0, index),
+                                  ...props.fetchImage.slice(index + 1),
+                                ];
+                                props.setFetchImage(arr);
+                              }, 1000);
                             }}
                           >
                             <Trash size={20} /> DELETE
@@ -159,6 +188,7 @@ const Carousel = (props) => {
                               ...props.fetchImage.slice(index + 1),
                             ];
                             props.setFetchImage(newFetchedImage);
+                            setAddOnDuplicate(true);
                           }}
                         >
                           <CopySimple size={20} />
@@ -173,7 +203,7 @@ const Carousel = (props) => {
             <button
               className="add"
               onClick={() => {
-                getRandomRoom();
+                getRandomRoom(props.setFetchImage, props.fetchImage);
                 setAddOnClick(true);
               }}
             >
@@ -183,7 +213,6 @@ const Carousel = (props) => {
         </Splide>
       </div>
     </div>
-    // </div>
   );
 };
 

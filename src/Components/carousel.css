@@ -1,53 +1,4 @@
-.mainContainerCarousel {
-  animation: zoom-in-zoom-out 1.5s ease forwards;
-  margin-top: 90px;
-  z-index: -2;
-
-  /* border: 1px red solid; */
-}
-
-@keyframes zoom-in-zoom-out {
-  0% {
-    transform: scale(2);
-  }
-  80% {
-    transform: scale(0.95);
-  }
-}
-
-.splideposition {
-  /* border: red solid 1px; */
-  border-radius: 25px;
-  transition: 0.5;
-  height: 85%;
-  width: 100%;
-  /* scale: 0.9; */
-}
-
-.splideImg {
-  border-radius: 25px;
-  transition: 0.5;
-  height: 85%;
-  width: 100%;
-  scale: 0.95;
-}
-
-.splideImgBlur {
-  filter: blur(5px);
-  transition: 0.5s;
-}
-
-.splideImgGrab {
-  cursor: grab;
-}
-
-.splideImgGrabbing {
-  cursor: grabbing;
-  scale: 1;
-  /* border-radius: 25px; */
-}
-
-.bkgContainer {
+.carouselViewContainer {
   background-color: rgba(80, 88, 96, 1);
   background-position: center;
   background-repeat: no-repeat;
@@ -68,17 +19,12 @@
   align-items: flex-start;
   padding: 10px;
   gap: 8px;
-
   min-width: 5%;
   min-height: 5%;
   top: 0px;
-
   background: rgba(48, 52, 56, 0.55);
   backdrop-filter: blur(4px);
-  /* Note: backdrop-filter has minimal browser support */
-
   border-radius: 0px 0px 16px 16px;
-
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0%);
@@ -92,29 +38,19 @@
   padding: 12px 16px;
   gap: 8px;
   border: none;
-
   background: rgba(0, 0, 0, 0.35);
   border-radius: 12px;
-
-  /* Inside auto layout */
-
   flex: none;
   order: 0;
   flex-grow: 0;
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 20px;
-  /* identical to box height, or 167% */
-
   text-align: center;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-
-  /* Interface/White */
-
   color: #ffffff;
 }
 
@@ -122,6 +58,53 @@
   color: green;
   font-weight: bold;
   background: rgba(209, 212, 222, 1);
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(2);
+  }
+  80% {
+    transform: scale(0.95);
+  }
+}
+.mainContainerCarousel {
+  animation: zoom-in-zoom-out 1.5s ease forwards;
+  margin-top: 90px;
+}
+
+.splidePosition {
+  height: 85%;
+  width: 100%;
+}
+
+.splideImg {
+  border-radius: 25px;
+  transition: 0.5;
+  width: 100%;
+  height: 700px;
+  scale: 0.95;
+}
+
+.customPagination {
+  z-index: 2;
+  position: absolute;
+  top: 100%;
+  scale: 0.8;
+}
+
+.splideImgBlur {
+  filter: blur(5px);
+  transition: 0.5s;
+}
+
+.splideImgGrab {
+  cursor: grab;
+}
+
+.splideImgGrabbing {
+  cursor: grabbing;
+  scale: 1;
 }
 
 .add {
@@ -144,92 +127,59 @@
   justify-content: end;
 }
 
-.photoInfo {
-  /* border: 1px red solid; */
+.photoNavigationContainer {
   display: flex;
   width: 95%;
   margin-left: 30px;
   margin-top: 2rem;
   justify-content: space-between;
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  /* identical to box height, or 167% */
-
   letter-spacing: 0.5px;
-
   color: #ffffff;
-  /* border: 1px yellow solid; */
 }
 
-.partOne {
+.photoDescription {
   display: flex;
   flex-direction: column;
 }
-.partOneSubOne {
+.photoDescriptionTop {
   display: flex;
 }
-.partOneSubTwo {
+.photoDescriptionBot {
   margin-right: 1rem;
 }
-.partTwo {
+.photoButtons {
   align-self: center;
   display: flex;
-  /* border: 1px orange solid; */
 }
 
-.partTwo > button {
+.photoButtons > button {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  /* gap: 6px; */
-
   padding: 12px 16px;
-  /* border: 1px red solid; */
   margin-right: 10px;
-
   background: rgba(0, 0, 0, 0.35);
   border-radius: 12px;
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 20px;
-  /* identical to box height, or 167% */
-
   text-align: center;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-
-  /* Interface/White */
-
   color: #ffffff;
-  /* scale: 80%; */
 }
 
-.partTwo :hover {
+.photoButtons :hover {
   color: black;
   background: rgba(209, 212, 222, 1);
-}
-
-/* .splide__pagination {
-  margin-top: 40%;
-} */
-
-/* .splide__pagination .splide__pagination--ltr {
-  border: red solid 1px !important;
-} */
-
-.customPagination {
-  z-index: 2;
-  position: absolute;
-  top: 100%;
-  scale: 0.8;
 }
 
 @media only screen and (max-width: 1000px) {

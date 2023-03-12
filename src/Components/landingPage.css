@@ -1,4 +1,4 @@
-.bkg {
+.landingPageBackground {
   background-color: rgba(80, 88, 96, 1);
 }
 
@@ -11,11 +11,11 @@
     transform: scale(1);
   }
 }
-.mainContainerZoomAnimation {
+.landingPageContainerZoomAnimation {
   animation: zoom-in 1.5s ease forwards;
 }
 
-.mainContainer {
+.landingPageContainer {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -23,6 +23,8 @@
   max-height: 100%;
   transition: 1s ease-in-out;
   opacity: 1;
+  height: 100vh;
+  width: 100vw;
 }
 
 @keyframes changeRoom {
@@ -33,7 +35,7 @@
     opacity: 1;
   }
 }
-.mainContainerTransition {
+.landingPageContainerTransition {
   transition: 1s ease-in-out;
   animation: changeRoom 1.5s ease forwards;
 }

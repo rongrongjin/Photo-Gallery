@@ -1,16 +1,14 @@
 import React from "react";
-import "./main.css";
+import "./landingPage.css";
 import { SignOut, Eye, Swap, ShareNetwork } from "@phosphor-icons/react";
 
-const Main = (props) => {
+const LandingPage = (props) => {
   return (
-    <div className="bkg">
+    <div className="landingPageBackground">
       <div
-        className="mainContainer mainContainerZoomAnimation"
-        id="mainContainerButtonContainer"
+        className="landingPageContainer landingPageContainerZoomAnimation"
+        id="landingPageContainerButtonContainer"
         style={{
-          height: "100vh",
-          width: "100vw",
           backgroundImage: `url(${
             props.fetchImage[props.activeSlide]?.urls.regular
           })`,
@@ -26,15 +24,17 @@ const Main = (props) => {
             onClick={(e) => {
               props.roomChangeHandler();
               let grandParentContainer = document.querySelector(
-                "#mainContainerButtonContainer"
+                "#landingPageContainerButtonContainer"
               );
-              grandParentContainer.classList.add("mainContainerTransition");
+              grandParentContainer.classList.add(
+                "landingPageContainerTransition"
+              );
               grandParentContainer.classList.remove(
-                "mainContainerZoomAnimation"
+                "landingPageContainerZoomAnimation"
               );
               setTimeout(() => {
                 grandParentContainer.classList.remove(
-                  "mainContainerTransition"
+                  "landingPageContainerTransition"
                 );
               }, 1500);
             }}
@@ -42,7 +42,7 @@ const Main = (props) => {
             <Swap size={20} />
             Change Room
           </button>
-          <button className="button" onClick={props.onShowCarou}>
+          <button className="button" onClick={props.changeViewMode}>
             <Eye size={20} />
             Views
           </button>
@@ -56,4 +56,4 @@ const Main = (props) => {
   );
 };
 
-export default Main;
+export default LandingPage;
