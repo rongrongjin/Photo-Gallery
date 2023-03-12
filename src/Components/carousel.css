@@ -15,12 +15,21 @@
   }
 }
 
-.splideposition .splideImg {
+.splideposition {
   /* border: red solid 1px; */
   border-radius: 25px;
   transition: 0.5;
   height: 85%;
-  width: 90%;
+  width: 100%;
+  /* scale: 0.9; */
+}
+
+.splideImg {
+  border-radius: 25px;
+  transition: 0.5;
+  height: 85%;
+  width: 100%;
+  scale: 0.95;
 }
 
 .splideImgBlur {
@@ -34,6 +43,8 @@
 
 .splideImgGrabbing {
   cursor: grabbing;
+  scale: 1;
+  /* border-radius: 25px; */
 }
 
 .bkgContainer {
@@ -134,16 +145,17 @@
 }
 
 .photoInfo {
+  /* border: 1px red solid; */
   display: flex;
-  width: 90%;
-  margin-left: 1rem;
+  width: 95%;
+  margin-left: 30px;
   margin-top: 2rem;
   justify-content: space-between;
 
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
   /* identical to box height, or 167% */
 
