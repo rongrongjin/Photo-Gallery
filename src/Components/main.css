@@ -1,11 +1,25 @@
+.bkg {
+  background-color: rgba(80, 88, 96, 1);
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(0.6);
+    border-radius: 25px;
+  }
+  80% {
+    transform: scale(1);
+  }
+}
+
 .mainContainer {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   max-width: 100%;
   max-height: 100%;
+  animation: zoom-in 1.5s ease forwards;
 }
-
 .buttonContainer {
   display: flex;
   justify-content: center;
@@ -65,14 +79,6 @@
   background: rgba(209, 212, 222, 1);
 }
 
-@media (min-width: 1000px) {
-}
-
-@keyframes zoom-out-zoom-in {
-  0% {
-    transform: scale(2);
-  }
-  80% {
-    transform: scale(0.95);
-  }
+@media (max-width: 1250px) {
+  /* … */
 }

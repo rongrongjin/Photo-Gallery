@@ -17,7 +17,7 @@
   /* border: red solid 1px; */
   border-radius: 25px;
   transition: 0.5;
-  height: 85%;
+  height: 65%;
   width: 90%;
 }
 
@@ -143,6 +143,7 @@
   letter-spacing: 0.5px;
 
   color: #ffffff;
+  /* border: 1px yellow solid; */
 }
 
 .partOne {
@@ -158,16 +159,18 @@
 .partTwo {
   align-self: center;
   display: flex;
+  /* border: 1px orange solid; */
 }
 
 .partTwo > button {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  gap: 8px;
+  /* gap: 6px; */
 
   padding: 12px 16px;
+  /* border: 1px red solid; */
   margin-right: 10px;
 
   background: rgba(0, 0, 0, 0.35);
@@ -187,6 +190,7 @@
   /* Interface/White */
 
   color: #ffffff;
+  /* scale: 80%; */
 }
 
 .partTwo :hover {
@@ -206,4 +210,11 @@
   z-index: 2;
   position: absolute;
   top: 100%;
+  scale: 0.8;
+}
+
+@media only screen and (max-width: 1000px) {
+  .mainContainerCarousel {
+    scale: 90%;
+  }
 }

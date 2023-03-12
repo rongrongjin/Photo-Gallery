@@ -35,7 +35,7 @@ const Carousel = (props) => {
         </button>
       </div>
 
-      <div className="mainContainer mainContainerCarousel">
+      <div className="mainContainerCarousel">
         <Splide
           hasTrack={false}
           aria-label="My Favorite Images"
@@ -56,9 +56,6 @@ const Carousel = (props) => {
           onActive={(slide) => {
             props.setActiveSlide(slide.index);
           }}
-          // onMounted={(slide) => {
-          //   slide.go(props.activeSlide );
-          // }}
         >
           <SplideTrack>
             {props.fetchImage.map((item, index) => {
@@ -84,7 +81,7 @@ const Carousel = (props) => {
                       e.currentTarget.classList.add("splideImgGrab");
                       e.currentTarget.classList.remove("splideImgGrabbing");
                     }}
-                    draggable={true}
+                    // draggable={true}
                   />
 
                   <div className="photoInfo">
@@ -102,7 +99,6 @@ const Carousel = (props) => {
                         <button
                           style={{ color: "red" }}
                           onClick={() => {
-                            // props.fetchImage.filter(item=>item.index === index )
                             let arr = [
                               ...props.fetchImage.slice(0, index),
                               ...props.fetchImage.slice(index + 1),
