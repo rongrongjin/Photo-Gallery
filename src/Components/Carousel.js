@@ -102,9 +102,8 @@ const Carousel = (props) => {
           aria-label="My Favorite Images"
           className="splidePosition"
           options={{
-            pagination: false,
             perPage: 1,
-            padding: "20%",
+            padding: "15%",
             width: "100vw",
             classes: {
               pagination: "splide__pagination customPagination",
