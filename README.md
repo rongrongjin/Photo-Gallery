@@ -1,6 +1,12 @@
-# Getting Started with Create React App
+# Work Sample for LeapTool
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and is hosted in firebase.
+
+Inside the app, User can change room in the landing page or enter view mode. 
+
+In the view mode, user can view all the room images, add new random photo of rooms or delete any photos they want.
+
+Splidejs was implemented for the Carousel inside the view mode.
 
 ## Available Scripts
 
