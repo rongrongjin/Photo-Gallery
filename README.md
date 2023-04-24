@@ -8,6 +8,8 @@ In the view mode, user can view all the room images, add new random photo of roo
 
 Splidejs was implemented for the Carousel inside the view mode.
 
+Website: https://work-sample-56528.web.app/
+
 ## Available Scripts
 
 In the project directory, you can run:
